@@ -206,6 +206,7 @@ bool SpawnWindow(const char *lpWindowName)
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 		flags |= SDL_WINDOW_RESIZABLE;
+		flags |= SDL_WINDOW_ALLOW_HIGHDPI;
 
 		auto quality = fmt::format("{}", static_cast<int>(*sgOptions.Graphics.scaleQuality));
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, quality.c_str());
