@@ -670,6 +670,7 @@ else()
     Source/main.cpp
     Source/devilutionx.exe.manifest
     Packaging/macOS/AppIcon.icns
+    ${DEVILUTIONX_MPQ}
     Packaging/windows/devilutionx.rc)
 endif()
 target_link_libraries(${BIN_TARGET} PRIVATE libdevilutionx)
@@ -1141,6 +1142,8 @@ if(APPLE)
   set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION})
   set(MACOSX_BUNDLE_LONG_VERSION_STRING "Version ${PROJECT_VERSION}")
   if(IOS)
+    set_source_files_properties("${DEVILUTIONX_MPQ}" PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    set_source_files_properties("spawn.mpq" PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
     set(CMAKE_OSX_DEPLOYMENT_TARGET "9.0")
   else()
     set(CMAKE_OSX_DEPLOYMENT_TARGET "10.12.0")
