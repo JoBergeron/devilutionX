@@ -6,6 +6,10 @@
 #include "utils/log.hpp"
 #include "utils/sdl_ptrs.h"
 
+#ifdef __IPHONEOS__
+#include "ios/ios_utils.h"
+#endif
+
 #ifdef USE_SDL1
 #include "utils/sdl2_to_1_2_backports.h"
 #endif
@@ -66,21 +70,29 @@ const std::string &BasePath()
 const std::string &PrefPath()
 {
 	if (!prefPath) {
-		prefPath = FromSDL(SDL_GetPrefPath("diasurgical", "devilution"));
-		if (FileExistsAndIsWriteable("diablo.ini")) {
+#if not defined(__IPHONEOS__)
+        if (FileExistsAndIsWriteable("diablo.ini"))
 			prefPath = std::string("./");
-		}
-	}
+		else
+            prefPath = FromSDL(SDL_GetPrefPath("diasurgical", "devilution"));
+#else
+        prefPath = IOSGetPrefPath();
+#endif
+    }
 	return *prefPath;
 }
 
 const std::string &ConfigPath()
 {
 	if (!configPath) {
-		configPath = FromSDL(SDL_GetPrefPath("diasurgical", "devilution"));
-		if (FileExistsAndIsWriteable("diablo.ini")) {
-			configPath = std::string("./");
-		}
+#if not defined(__IPHONEOS__)
+        if (FileExistsAndIsWriteable("diablo.ini"))
+            configPath = std::string("./");
+        else
+            configPath = FromSDL(SDL_GetPrefPath("diasurgical", "devilution"));
+#else
+        configPath = IOSGetPrefPath();
+#endif
 	}
 	return *configPath;
 }
