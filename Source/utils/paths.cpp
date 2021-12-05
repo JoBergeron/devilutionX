@@ -70,7 +70,7 @@ const std::string &BasePath()
 const std::string &PrefPath()
 {
 	if (!prefPath) {
-#if not defined(__IPHONEOS__)
+#ifndef __IPHONEOS__
         if (FileExistsAndIsWriteable("diablo.ini"))
 			prefPath = std::string("./");
 		else
@@ -85,7 +85,7 @@ const std::string &PrefPath()
 const std::string &ConfigPath()
 {
 	if (!configPath) {
-#if not defined(__IPHONEOS__)
+#ifndef __IPHONEOS__
         if (FileExistsAndIsWriteable("diablo.ini"))
             configPath = std::string("./");
         else
