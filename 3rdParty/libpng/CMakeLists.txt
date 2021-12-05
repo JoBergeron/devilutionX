@@ -19,10 +19,14 @@ set(PNG_TESTS OFF)
 set(PNG_EXECUTABLES OFF)
 set(SKIP_INSTALL_PROGRAMS ON)
 
+if(IOS AND CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
+  set(PNG_ARM_NEON "on")
+endif()
+
 include(FetchContent)
 FetchContent_Declare(png
-  URL https://github.com/StephenCWills/libpng/archive/5cfc16530ae7f2c1f1c88ecd08b0fde2e2a4cd93.tar.gz
-  URL_HASH MD5=e98756c6316f51ca9c045bb2f1bdf307
+  URL https://github.com/diasurgical/libpng/archive/853b998ed76cbea39c2ffcd48a3fb32a396364c3.tar.gz
+  URL_HASH MD5=cc78c186000fcf17ad85d67c55699fcb
 )
 FetchContent_MakeAvailableExcludeFromAll(png)
 
